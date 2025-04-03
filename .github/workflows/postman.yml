@@ -1,33 +1,26 @@
 name: Automated API tests using Postman CLI
 
 on: 
-  push:  # Trigger on push events (can adjust this as needed)
+  push:
 
 jobs:
   automated-api-tests:
-    runs-on: windows-latest  # Runs the job on the latest Windows runner
+    runs-on: windows-latest
 
     steps:
-      # Step 1: Checkout the repository to access the files
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Install Postman CLI
       - name: Install Postman CLI
         run: |
           powershell.exe -NoProfile -InputFormat None -ExecutionPolicy AllSigned -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://dl-cli.pstmn.io/install/win64.ps1'))"
-      
-      # Step 3: Verify Postman CLI Installation
+
       - name: Verify Postman CLI Installation
         run: postman --version
 
-      # Step 4: Login to Postman CLI with API Key
       - name: Login to Postman CLI
-        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}  # Use the API Key stored in GitHub Secrets
-      
-      # Step 5: Run the Postman Collection using Collection ID and Environment ID
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+
       - name: Run Postman Collection
         run: |
-          postman collection run https://api.getpostman.com/collections/9578175-59faff03-6266-4623-a317-03587212e823 \
-            --environment https://api.getpostman.com/environments/9578175-44037ed4-9749-40ba-9ca9-f18e098f34c5 \
-            --global-var "base-url=https://7e70761e-fa25-4cbb-b673-010fbba77d97.mock.pstmn.io"  # Pass the mock server URL as a variable
+          postman collection run https://api.getpostman.com/collections/9578175-59faff03-6266-4623-a317-03587212e823 --environment https://api.getpostman.com/environments/9578175-44037ed4-9749-40ba-9ca9-f18e098f34c5 --global-var "base-url=https://7e70761e-fa25-4cbb-b673-010fbba77d97.mock.pstmn.io"
