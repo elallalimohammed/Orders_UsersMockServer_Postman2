@@ -1,0 +1,6 @@
+@Orders_UsersMockServer_Postman_HostAddress = http://localhost:5124
+
+GET {{Orders_UsersMockServer_Postman_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
