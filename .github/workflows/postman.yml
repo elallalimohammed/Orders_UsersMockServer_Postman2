@@ -4,15 +4,8 @@ on: push
 
 jobs:
   automated-api-tests:
-    services:
-      your-service:
-        image: your-docker-image:latest
-        ports:
-          - 7173:7173
-        options: --health-cmd="curl --silent --fail http://localhost:7173/health || exit 1" --health-timeout=5s --health-retries=3
-    
-    
-    runs-on: ubuntu-latest
+      
+    runs-on: Windows-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Postman CLI
