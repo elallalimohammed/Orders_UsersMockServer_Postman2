@@ -12,7 +12,7 @@ jobs:
         options: --health-cmd="curl --silent --fail http://localhost:7173/health || exit 1" --health-timeout=5s --health-retries=3
     
     
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Postman CLI
